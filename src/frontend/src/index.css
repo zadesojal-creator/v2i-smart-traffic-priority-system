@@ -1,0 +1,186 @@
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #0f1629;
+  --bg-card: #1a2540;
+  --bg-card-hover: #1e2d4d;
+  --border-color: #2a3a5c;
+  --border-accent: rgba(0, 168, 255, 0.2);
+  --text-primary: #e8edf5;
+  --text-secondary: #8899bb;
+  --text-muted: #4a5a7a;
+  --accent-blue: #00a8ff;
+  --accent-blue-dark: #0078d4;
+  --accent-red: #ff3b3b;
+  --accent-amber: #ff9800;
+  --accent-green: #00c853;
+  --accent-purple: #9c27b0;
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(0, 168, 255, 0.15);
+  --radius-card: 12px;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f0f4f8;
+  --bg-secondary: #e4ecf7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f7faff;
+  --border-color: #d0dce8;
+  --border-accent: rgba(0, 120, 212, 0.2);
+  --text-primary: #1a2540;
+  --text-secondary: #4a6080;
+  --text-muted: #8899bb;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 20px rgba(0, 120, 212, 0.1);
+}
+
+* {
+  transition: background-color 0.2s, border-color 0.2s, color 0.1s;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.card-glow {
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  border-color: var(--border-accent);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  margin-bottom: 2px;
+}
+.sidebar-item:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+.sidebar-item.active {
+  background: var(--bg-card);
+  color: var(--accent-blue);
+  border-left-color: var(--accent-blue);
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 59, 59, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0);
+  }
+}
+
+.pulse-blue {
+  animation: pulse-blue 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+@keyframes pulse-blue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 168, 255, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 168, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 168, 255, 0);
+  }
+}
+
+.leaflet-container {
+  background: #1a2540 !important;
+}
+[data-theme="light"] .leaflet-container {
+  background: #e8f0fe !important;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.status-normal {
+  background: rgba(0, 200, 83, 0.15);
+  color: #00c853;
+  border: 1px solid rgba(0, 200, 83, 0.3);
+}
+.status-priority {
+  background: rgba(0, 168, 255, 0.15);
+  color: #00a8ff;
+  border: 1px solid rgba(0, 168, 255, 0.3);
+}
+.status-fault {
+  background: rgba(255, 59, 59, 0.15);
+  color: #ff3b3b;
+  border: 1px solid rgba(255, 59, 59, 0.3);
+}
+.status-maintenance {
+  background: rgba(255, 152, 0, 0.15);
+  color: #ff9800;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+.status-active {
+  background: rgba(0, 200, 83, 0.15);
+  color: #00c853;
+  border: 1px solid rgba(0, 200, 83, 0.3);
+}
+.status-idle {
+  background: rgba(136, 153, 187, 0.15);
+  color: #8899bb;
+  border: 1px solid rgba(136, 153, 187, 0.3);
+}
+.status-mission {
+  background: rgba(255, 59, 59, 0.15);
+  color: #ff3b3b;
+  border: 1px solid rgba(255, 59, 59, 0.3);
+}
